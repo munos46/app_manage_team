@@ -1,0 +1,79 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-action-heading" jhiTranslate="manageTeamApp.action.home.createOrEditLabel">Create or edit a Action</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!action.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="action.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.action.typeAction" for="field_typeAction">Type Action</label>
+                    <select class="form-control" name="typeAction" [(ngModel)]="action.typeAction" id="field_typeAction"  required>
+                        <option value="GOAL">{{'manageTeamApp.TypeAction.GOAL' | translate}}</option>
+                        <option value="CARDYELOW">{{'manageTeamApp.TypeAction.CARDYELOW' | translate}}</option>
+                        <option value="ATTACK">{{'manageTeamApp.TypeAction.ATTACK' | translate}}</option>
+                        <option value="REPLACEMENT">{{'manageTeamApp.TypeAction.REPLACEMENT' | translate}}</option>
+                        <option value="CARDRED">{{'manageTeamApp.TypeAction.CARDRED' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.typeAction?.dirty && editForm.controls.typeAction?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.typeAction?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.action.minute" for="field_minute">Minute</label>
+                    <input type="number" class="form-control" name="minute" id="field_minute"
+                        [(ngModel)]="action.minute" required/>
+                    <div [hidden]="!(editForm.controls.minute?.dirty && editForm.controls.minute?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.minute?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.minute?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.action.prolongation" for="field_prolongation">Prolongation</label>
+                    <input type="checkbox" class="form-control" name="prolongation" id="field_prolongation"
+                        [(ngModel)]="action.prolongation" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.action.commntary" for="field_commntary">Commntary</label>
+                    <input type="text" class="form-control" name="commntary" id="field_commntary"
+                        [(ngModel)]="action.commntary" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.action.playerOne" for="field_playerOne">Player One</label>
+                    <select class="form-control" id="field_playerOne" name="playerOne" [(ngModel)]="action.playerOneId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="playerOption.id" *ngFor="let playerOption of playerones; trackBy: trackPlayerById">{{playerOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.action.playerTwo" for="field_playerTwo">Player Two</label>
+                    <select class="form-control" id="field_playerTwo" name="playerTwo" [(ngModel)]="action.playerTwoId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="playerOption.id" *ngFor="let playerOption of playertwos; trackBy: trackPlayerById">{{playerOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <span class="fas fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <span class="fas fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

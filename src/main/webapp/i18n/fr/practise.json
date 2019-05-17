@@ -1,0 +1,25 @@
+
+{
+    "manageTeamApp": {
+        "practise" : {
+            "home": {
+                "title": "Practises",
+                "createLabel": "Créer un nouveau Practise",
+                "createOrEditLabel": "Créer ou éditer un Practise"
+            },
+            "created": "Un nouveau Practise a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Practise avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Practise avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Practise {{ id }} ?"
+            },
+            "detail": {
+                "title": "Practise"
+            },
+            "date": "Date",
+            "stade": "Stade",
+            "players": "Players",
+            "manages": "Manages"
+        }
+    }
+}

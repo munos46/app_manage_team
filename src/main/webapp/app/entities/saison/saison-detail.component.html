@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="saison">
+            <h2><span jhiTranslate="manageTeamApp.saison.detail.title">Saison</span> {{saison.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="manageTeamApp.saison.nom">Nom</span></dt>
+                <dd>
+                    <span>{{saison.nom}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.saison.dateDebut">Date Debut</span></dt>
+                <dd>
+                    <span>{{saison.dateDebut}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.saison.dateFin">Date Fin</span></dt>
+                <dd>
+                    <span>{{saison.dateFin}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <span class="fas fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/saison', saison.id, 'edit']"
+                    class="btn btn-primary">
+                <span class="fas fa-pencil-alt"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

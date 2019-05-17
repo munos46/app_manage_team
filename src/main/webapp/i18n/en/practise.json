@@ -1,0 +1,25 @@
+
+{
+    "manageTeamApp": {
+        "practise" : {
+            "home": {
+                "title": "Practises",
+                "createLabel": "Create a new Practise",
+                "createOrEditLabel": "Create or edit a Practise"
+            },
+            "created": "A new Practise is created with identifier {{ param }}",
+            "updated": "A Practise is updated with identifier {{ param }}",
+            "deleted": "A Practise is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Practise {{ id }}?"
+            },
+            "detail": {
+                "title": "Practise"
+            },
+            "date": "Date",
+            "stade": "Stade",
+            "players": "Players",
+            "manages": "Manages"
+        }
+    }
+}

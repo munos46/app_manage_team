@@ -1,0 +1,12 @@
+{
+    "manageTeamApp": {
+        "TypeAction" : {
+            "null": "",
+            "GOAL": "GOAL",
+            "CARDYELOW": "CARDYELOW",
+            "ATTACK": "ATTACK",
+            "REPLACEMENT": "REPLACEMENT",
+            "CARDRED": "CARDRED"
+        }
+    }
+}

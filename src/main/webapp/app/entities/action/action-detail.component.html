@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="action">
+            <h2><span jhiTranslate="manageTeamApp.action.detail.title">Action</span> {{action.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="manageTeamApp.action.typeAction">Type Action</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'manageTeamApp.TypeAction.' + action.typeAction}}">{{action.typeAction}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.action.minute">Minute</span></dt>
+                <dd>
+                    <span>{{action.minute}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.action.prolongation">Prolongation</span></dt>
+                <dd>
+                    <span>{{action.prolongation}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.action.commntary">Commntary</span></dt>
+                <dd>
+                    <span>{{action.commntary}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.action.playerOne">Player One</span></dt>
+                <dd>
+                    <div *ngIf="action.playerOneId">
+                        <a [routerLink]="['/player', action.playerOneId, 'view']">{{action.playerOneId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.action.playerTwo">Player Two</span></dt>
+                <dd>
+                    <div *ngIf="action.playerTwoId">
+                        <a [routerLink]="['/player', action.playerTwoId, 'view']">{{action.playerTwoId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <span class="fas fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/action', action.id, 'edit']"
+                    class="btn btn-primary">
+                <span class="fas fa-pencil-alt"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

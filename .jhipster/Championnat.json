@@ -1,0 +1,62 @@
+{
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "pointVictoire",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "pointNull",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "pointDefaite",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "pointForfait",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "saison",
+            "otherEntityName": "saison",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "championnat"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "adversaires",
+            "otherEntityName": "team",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "journees",
+            "otherEntityName": "game",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20180524115343",
+    "entityTableName": "championnat",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

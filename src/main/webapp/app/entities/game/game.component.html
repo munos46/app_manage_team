@@ -1,0 +1,96 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="manageTeamApp.game.home.title">Games</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-game" [routerLink]="['/game/new']">
+            <span class="fas fa-plus"></span>
+            <span  jhiTranslate="manageTeamApp.game.home.createLabel">
+            Create new Game
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="games">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="manageTeamApp.game.date">Date</span></th>
+            <th><span jhiTranslate="manageTeamApp.game.home">Home</span></th>
+            <th><span jhiTranslate="manageTeamApp.game.myGoal">My Goal</span></th>
+            <th><span jhiTranslate="manageTeamApp.game.herGoal">Her Goal</span></th>
+            <th><span jhiTranslate="manageTeamApp.game.team">Team</span></th>
+            <th><span jhiTranslate="manageTeamApp.game.secondTeam">Second Team</span></th>
+            <th><span jhiTranslate="manageTeamApp.game.stade">Stade</span></th>
+            <th><span jhiTranslate="manageTeamApp.game.manages">Manages</span></th>
+            <th><span jhiTranslate="manageTeamApp.game.players">Players</span></th>
+            <th><span jhiTranslate="manageTeamApp.game.actions">Actions</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let game of games ;trackBy: trackId">
+                <td><a [routerLink]="['/game', game.id, 'view' ]">{{game.id}}</a></td>
+                <td>{{game.date | date:'medium'}}</td>
+                <td>{{game.home}}</td>
+                <td>{{game.myGoal}}</td>
+                <td>{{game.herGoal}}</td>
+                <td>
+                    <div *ngIf="game.teamId">
+                        <a [routerLink]="['../team', game.teamId , 'view' ]" >{{game.teamId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="game.secondTeamId">
+                        <a [routerLink]="['../team', game.secondTeamId , 'view' ]" >{{game.secondTeamId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="game.stadeId">
+                        <a [routerLink]="['../stade', game.stadeId , 'view' ]" >{{game.stadeId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <span *ngFor="let manages of game.manages; let last = last">
+                            <a class="form-control-static" [routerLink]="['../manager', manages?.id, 'view' ]">{{manages.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <span *ngFor="let players of game.players; let last = last">
+                            <a class="form-control-static" [routerLink]="['../player', players?.id, 'view' ]">{{players.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <span *ngFor="let actions of game.actions; let last = last">
+                            <a class="form-control-static" [routerLink]="['../action', actions?.id, 'view' ]">{{actions.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/game', game.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fas fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/game', game.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <span class="fas fa-pencil-alt"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'game/'+ game.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fas fa-times"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

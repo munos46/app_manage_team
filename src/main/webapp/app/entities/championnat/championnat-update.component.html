@@ -1,0 +1,74 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-championnat-heading" jhiTranslate="manageTeamApp.championnat.home.createOrEditLabel">Create or edit a Championnat</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!championnat.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="championnat.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.championnat.nom" for="field_nom">Nom</label>
+                    <input type="text" class="form-control" name="nom" id="field_nom"
+                        [(ngModel)]="championnat.nom" required/>
+                    <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nom?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.championnat.pointVictoire" for="field_pointVictoire">Point Victoire</label>
+                    <input type="number" class="form-control" name="pointVictoire" id="field_pointVictoire"
+                        [(ngModel)]="championnat.pointVictoire" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.championnat.pointNull" for="field_pointNull">Point Null</label>
+                    <input type="number" class="form-control" name="pointNull" id="field_pointNull"
+                        [(ngModel)]="championnat.pointNull" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.championnat.pointDefaite" for="field_pointDefaite">Point Defaite</label>
+                    <input type="number" class="form-control" name="pointDefaite" id="field_pointDefaite"
+                        [(ngModel)]="championnat.pointDefaite" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.championnat.pointForfait" for="field_pointForfait">Point Forfait</label>
+                    <input type="number" class="form-control" name="pointForfait" id="field_pointForfait"
+                        [(ngModel)]="championnat.pointForfait" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.championnat.saison" for="field_saison">Saison</label>
+                    <select class="form-control" id="field_saison" name="saison" [(ngModel)]="championnat.saisonId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="saisonOption.id" *ngFor="let saisonOption of saisons; trackBy: trackSaisonById">{{saisonOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="manageTeamApp.championnat.adversaires" for="field_adversaires">Adversaires</label>
+                    <select class="form-control" id="field_adversaires" multiple name="adversaires" [(ngModel)]="championnat.adversaires">
+                        <option [ngValue]="getSelected(championnat.adversaires, teamOption)" *ngFor="let teamOption of teams; trackBy: trackTeamById">{{teamOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="manageTeamApp.championnat.journees" for="field_journees">Journees</label>
+                    <select class="form-control" id="field_journees" multiple name="journees" [(ngModel)]="championnat.journees">
+                        <option [ngValue]="getSelected(championnat.journees, gameOption)" *ngFor="let gameOption of games; trackBy: trackGameById">{{gameOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <span class="fas fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <span class="fas fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

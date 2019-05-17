@@ -1,0 +1,74 @@
+{
+    "fields": [
+        {
+            "fieldName": "firstName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hireDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "anneeArrivee",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "poids",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "taille",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "numMaillot",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "numLicence",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imgProfile",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "player",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "player"
+        }
+    ],
+    "changelogDate": "20180524115334",
+    "entityTableName": "player",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

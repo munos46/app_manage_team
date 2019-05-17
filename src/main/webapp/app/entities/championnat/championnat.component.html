@@ -1,0 +1,80 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="manageTeamApp.championnat.home.title">Championnats</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-championnat" [routerLink]="['/championnat/new']">
+            <span class="fas fa-plus"></span>
+            <span  jhiTranslate="manageTeamApp.championnat.home.createLabel">
+            Create new Championnat
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="championnats">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="manageTeamApp.championnat.nom">Nom</span></th>
+            <th><span jhiTranslate="manageTeamApp.championnat.pointVictoire">Point Victoire</span></th>
+            <th><span jhiTranslate="manageTeamApp.championnat.pointNull">Point Null</span></th>
+            <th><span jhiTranslate="manageTeamApp.championnat.pointDefaite">Point Defaite</span></th>
+            <th><span jhiTranslate="manageTeamApp.championnat.pointForfait">Point Forfait</span></th>
+            <th><span jhiTranslate="manageTeamApp.championnat.saison">Saison</span></th>
+            <th><span jhiTranslate="manageTeamApp.championnat.adversaires">Adversaires</span></th>
+            <th><span jhiTranslate="manageTeamApp.championnat.journees">Journees</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let championnat of championnats ;trackBy: trackId">
+                <td><a [routerLink]="['/championnat', championnat.id, 'view' ]">{{championnat.id}}</a></td>
+                <td>{{championnat.nom}}</td>
+                <td>{{championnat.pointVictoire}}</td>
+                <td>{{championnat.pointNull}}</td>
+                <td>{{championnat.pointDefaite}}</td>
+                <td>{{championnat.pointForfait}}</td>
+                <td>
+                    <div *ngIf="championnat.saisonId">
+                        <a [routerLink]="['../saison', championnat.saisonId , 'view' ]" >{{championnat.saisonId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <span *ngFor="let adversaires of championnat.adversaires; let last = last">
+                            <a class="form-control-static" [routerLink]="['../team', adversaires?.id, 'view' ]">{{adversaires.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <span *ngFor="let journees of championnat.journees; let last = last">
+                            <a class="form-control-static" [routerLink]="['../game', journees?.id, 'view' ]">{{journees.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/championnat', championnat.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fas fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/championnat', championnat.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <span class="fas fa-pencil-alt"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'championnat/'+ championnat.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fas fa-times"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

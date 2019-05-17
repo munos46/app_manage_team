@@ -1,0 +1,75 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="game">
+            <h2><span jhiTranslate="manageTeamApp.game.detail.title">Game</span> {{game.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="manageTeamApp.game.date">Date</span></dt>
+                <dd>
+                    <span>{{game.date}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.game.home">Home</span></dt>
+                <dd>
+                    <span>{{game.home}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.game.myGoal">My Goal</span></dt>
+                <dd>
+                    <span>{{game.myGoal}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.game.herGoal">Her Goal</span></dt>
+                <dd>
+                    <span>{{game.herGoal}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.game.team">Team</span></dt>
+                <dd>
+                    <div *ngIf="game.teamId">
+                        <a [routerLink]="['/team', game.teamId, 'view']">{{game.teamId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.game.secondTeam">Second Team</span></dt>
+                <dd>
+                    <div *ngIf="game.secondTeamId">
+                        <a [routerLink]="['/team', game.secondTeamId, 'view']">{{game.secondTeamId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.game.stade">Stade</span></dt>
+                <dd>
+                    <div *ngIf="game.stadeId">
+                        <a [routerLink]="['/stade', game.stadeId, 'view']">{{game.stadeId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.game.manages">Manages</span></dt>
+                <dd>
+                    <span *ngFor="let manages of game.manages; let last = last">
+                        <a [routerLink]="['/manager', manages?.id, 'view' ]">{{manages.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.game.players">Players</span></dt>
+                <dd>
+                    <span *ngFor="let players of game.players; let last = last">
+                        <a [routerLink]="['/player', players?.id, 'view' ]">{{players.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.game.actions">Actions</span></dt>
+                <dd>
+                    <span *ngFor="let actions of game.actions; let last = last">
+                        <a [routerLink]="['/action', actions?.id, 'view' ]">{{actions.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <span class="fas fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/game', game.id, 'edit']"
+                    class="btn btn-primary">
+                <span class="fas fa-pencil-alt"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

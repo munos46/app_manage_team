@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity Game.
+    -->
+    <changeSet id="20180524115338-1" author="jhipster">
+        <createTable tableName="game">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="jhi_date" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="home" type="bit">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="my_goal" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="her_goal" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="team_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>            <column name="second_team_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>            <column name="stade_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="game" columnName="jhi_date" columnDataType="datetime"/>
+        
+        <createTable tableName="game_manages">
+            <column name="manages_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="games_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="games_id, manages_id" tableName="game_manages"/>
+        
+        <createTable tableName="game_players">
+            <column name="players_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="games_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="games_id, players_id" tableName="game_players"/>
+        
+        <createTable tableName="game_actions">
+            <column name="actions_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="games_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="games_id, actions_id" tableName="game_actions"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

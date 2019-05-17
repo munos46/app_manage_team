@@ -1,0 +1,95 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-game-heading" jhiTranslate="manageTeamApp.game.home.createOrEditLabel">Create or edit a Game</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!game.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="game.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.game.date" for="field_date">Date</label>
+                    <div class="d-flex">
+                        <input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="date"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.date?.dirty && editForm.controls.date?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.date?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.date?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.game.home" for="field_home">Home</label>
+                    <input type="checkbox" class="form-control" name="home" id="field_home"
+                        [(ngModel)]="game.home" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.game.myGoal" for="field_myGoal">My Goal</label>
+                    <input type="number" class="form-control" name="myGoal" id="field_myGoal"
+                        [(ngModel)]="game.myGoal" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.game.herGoal" for="field_herGoal">Her Goal</label>
+                    <input type="number" class="form-control" name="herGoal" id="field_herGoal"
+                        [(ngModel)]="game.herGoal" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.game.team" for="field_team">Team</label>
+                    <select class="form-control" id="field_team" name="team" [(ngModel)]="game.teamId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="teamOption.id" *ngFor="let teamOption of teams; trackBy: trackTeamById">{{teamOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.game.secondTeam" for="field_secondTeam">Second Team</label>
+                    <select class="form-control" id="field_secondTeam" name="secondTeam" [(ngModel)]="game.secondTeamId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="teamOption.id" *ngFor="let teamOption of secondteams; trackBy: trackTeamById">{{teamOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.game.stade" for="field_stade">Stade</label>
+                    <select class="form-control" id="field_stade" name="stade" [(ngModel)]="game.stadeId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="stadeOption.id" *ngFor="let stadeOption of stades; trackBy: trackStadeById">{{stadeOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="manageTeamApp.game.manages" for="field_manages">Manages</label>
+                    <select class="form-control" id="field_manages" multiple name="manages" [(ngModel)]="game.manages">
+                        <option [ngValue]="getSelected(game.manages, managerOption)" *ngFor="let managerOption of managers; trackBy: trackManagerById">{{managerOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="manageTeamApp.game.players" for="field_players">Players</label>
+                    <select class="form-control" id="field_players" multiple name="players" [(ngModel)]="game.players">
+                        <option [ngValue]="getSelected(game.players, playerOption)" *ngFor="let playerOption of players; trackBy: trackPlayerById">{{playerOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="manageTeamApp.game.actions" for="field_actions">Actions</label>
+                    <select class="form-control" id="field_actions" multiple name="actions" [(ngModel)]="game.actions">
+                        <option [ngValue]="getSelected(game.actions, actionOption)" *ngFor="let actionOption of actions; trackBy: trackActionById">{{actionOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <span class="fas fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <span class="fas fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

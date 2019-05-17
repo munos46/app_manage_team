@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="championnat">
+            <h2><span jhiTranslate="manageTeamApp.championnat.detail.title">Championnat</span> {{championnat.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="manageTeamApp.championnat.nom">Nom</span></dt>
+                <dd>
+                    <span>{{championnat.nom}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.championnat.pointVictoire">Point Victoire</span></dt>
+                <dd>
+                    <span>{{championnat.pointVictoire}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.championnat.pointNull">Point Null</span></dt>
+                <dd>
+                    <span>{{championnat.pointNull}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.championnat.pointDefaite">Point Defaite</span></dt>
+                <dd>
+                    <span>{{championnat.pointDefaite}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.championnat.pointForfait">Point Forfait</span></dt>
+                <dd>
+                    <span>{{championnat.pointForfait}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.championnat.saison">Saison</span></dt>
+                <dd>
+                    <div *ngIf="championnat.saisonId">
+                        <a [routerLink]="['/saison', championnat.saisonId, 'view']">{{championnat.saisonId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.championnat.adversaires">Adversaires</span></dt>
+                <dd>
+                    <span *ngFor="let adversaires of championnat.adversaires; let last = last">
+                        <a [routerLink]="['/team', adversaires?.id, 'view' ]">{{adversaires.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.championnat.journees">Journees</span></dt>
+                <dd>
+                    <span *ngFor="let journees of championnat.journees; let last = last">
+                        <a [routerLink]="['/game', journees?.id, 'view' ]">{{journees.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <span class="fas fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/championnat', championnat.id, 'edit']"
+                    class="btn btn-primary">
+                <span class="fas fa-pencil-alt"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

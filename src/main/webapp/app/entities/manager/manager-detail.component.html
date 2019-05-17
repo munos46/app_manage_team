@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="manager">
+            <h2><span jhiTranslate="manageTeamApp.manager.detail.title">Manager</span> {{manager.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="manageTeamApp.manager.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{manager.firstName}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.manager.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{manager.lastName}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.manager.email">Email</span></dt>
+                <dd>
+                    <span>{{manager.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.manager.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{manager.phoneNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.manager.hireDate">Hire Date</span></dt>
+                <dd>
+                    <span>{{manager.hireDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.manager.anneeArrivee">Annee Arrivee</span></dt>
+                <dd>
+                    <span>{{manager.anneeArrivee}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.manager.imgProfile">Img Profile</span></dt>
+                <dd>
+                    <div *ngIf="manager.imgProfile">
+                        <a (click)="openFile(manager.imgProfileContentType, manager.imgProfile)">
+                            <img [src]="'data:' + manager.imgProfileContentType + ';base64,' + manager.imgProfile" style="max-width: 100%;" alt="manager image"/>
+                        </a>
+                        {{manager.imgProfileContentType}}, {{byteSize(manager.imgProfile)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.manager.manager">Manager</span></dt>
+                <dd>
+                    {{manager.managerId}}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <span class="fas fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/manager', manager.id, 'edit']"
+                    class="btn btn-primary">
+                <span class="fas fa-pencil-alt"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

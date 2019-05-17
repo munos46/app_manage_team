@@ -1,0 +1,75 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="manageTeamApp.team.home.title">Teams</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-team" [routerLink]="['/team/new']">
+            <span class="fas fa-plus"></span>
+            <span  jhiTranslate="manageTeamApp.team.home.createLabel">
+            Create new Team
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="teams">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="manageTeamApp.team.nom">Nom</span></th>
+            <th><span jhiTranslate="manageTeamApp.team.adversaire">Adversaire</span></th>
+            <th><span jhiTranslate="manageTeamApp.team.logo">Logo</span></th>
+            <th><span jhiTranslate="manageTeamApp.team.managers">Managers</span></th>
+            <th><span jhiTranslate="manageTeamApp.team.players">Players</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let team of teams ;trackBy: trackId">
+                <td><a [routerLink]="['/team', team.id, 'view' ]">{{team.id}}</a></td>
+                <td>{{team.nom}}</td>
+                <td>{{team.adversaire}}</td>
+                <td>
+                    <a *ngIf="team.logo" (click)="openFile(team.logoContentType, team.logo)">
+                        <img [src]="'data:' + team.logoContentType + ';base64,' + team.logo" style="max-height: 30px;" alt="team image"/>
+                    </a>
+                    <span *ngIf="team.logo">{{team.logoContentType}}, {{byteSize(team.logo)}}</span>
+                </td>
+                <td>
+                    <span *ngFor="let managers of team.managers; let last = last">
+                            <a class="form-control-static" [routerLink]="['../manager', managers?.id, 'view' ]">{{managers.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <span *ngFor="let players of team.players; let last = last">
+                            <a class="form-control-static" [routerLink]="['../player', players?.id, 'view' ]">{{players.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/team', team.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fas fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/team', team.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <span class="fas fa-pencil-alt"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'team/'+ team.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fas fa-times"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="manageTeamApp.practise.home.title">Practises</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-practise" [routerLink]="['/practise/new']">
+            <span class="fas fa-plus"></span>
+            <span  jhiTranslate="manageTeamApp.practise.home.createLabel">
+            Create new Practise
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="practises">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="manageTeamApp.practise.date">Date</span></th>
+            <th><span jhiTranslate="manageTeamApp.practise.stade">Stade</span></th>
+            <th><span jhiTranslate="manageTeamApp.practise.players">Players</span></th>
+            <th><span jhiTranslate="manageTeamApp.practise.manages">Manages</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let practise of practises ;trackBy: trackId">
+                <td><a [routerLink]="['/practise', practise.id, 'view' ]">{{practise.id}}</a></td>
+                <td>{{practise.date | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="practise.stadeId">
+                        <a [routerLink]="['../stade', practise.stadeId , 'view' ]" >{{practise.stadeId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <span *ngFor="let players of practise.players; let last = last">
+                            <a class="form-control-static" [routerLink]="['../player', players?.id, 'view' ]">{{players.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <span *ngFor="let manages of practise.manages; let last = last">
+                            <a class="form-control-static" [routerLink]="['../manager', manages?.id, 'view' ]">{{manages.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/practise', practise.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fas fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/practise', practise.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <span class="fas fa-pencil-alt"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'practise/'+ practise.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fas fa-times"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+{
+    "manageTeamApp": {
+        "TypeEvenement" : {
+            "null": "",
+            "AMICAL": "AMICAL",
+            "SOIREE": "SOIREE",
+            "TOURNOIS": "TOURNOIS",
+            "AUTRES": "AUTRES"
+        }
+    }
+}

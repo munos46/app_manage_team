@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="team">
+            <h2><span jhiTranslate="manageTeamApp.team.detail.title">Team</span> {{team.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="manageTeamApp.team.nom">Nom</span></dt>
+                <dd>
+                    <span>{{team.nom}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.team.adversaire">Adversaire</span></dt>
+                <dd>
+                    <span>{{team.adversaire}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.team.logo">Logo</span></dt>
+                <dd>
+                    <div *ngIf="team.logo">
+                        <a (click)="openFile(team.logoContentType, team.logo)">
+                            <img [src]="'data:' + team.logoContentType + ';base64,' + team.logo" style="max-width: 100%;" alt="team image"/>
+                        </a>
+                        {{team.logoContentType}}, {{byteSize(team.logo)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.team.managers">Managers</span></dt>
+                <dd>
+                    <span *ngFor="let managers of team.managers; let last = last">
+                        <a [routerLink]="['/manager', managers?.id, 'view' ]">{{managers.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.team.players">Players</span></dt>
+                <dd>
+                    <span *ngFor="let players of team.players; let last = last">
+                        <a [routerLink]="['/player', players?.id, 'view' ]">{{players.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <span class="fas fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/team', team.id, 'edit']"
+                    class="btn btn-primary">
+                <span class="fas fa-pencil-alt"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+{
+    "fields": [
+        {
+            "fieldName": "typeAction",
+            "fieldType": "TypeAction",
+            "fieldValues": "GOAL,CARDYELOW,ATTACK,REPLACEMENT,CARDRED",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "minute",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "prolongation",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "commntary",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "playerOne",
+            "otherEntityName": "player",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "action"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "playerTwo",
+            "otherEntityName": "player",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "action"
+        }
+    ],
+    "changelogDate": "20180524115341",
+    "entityTableName": "action",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

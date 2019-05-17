@@ -1,0 +1,83 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="manageTeamApp.player.home.title">Players</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-player" [routerLink]="['/player/new']">
+            <span class="fas fa-plus"></span>
+            <span  jhiTranslate="manageTeamApp.player.home.createLabel">
+            Create new Player
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="players">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="manageTeamApp.player.firstName">First Name</span></th>
+            <th><span jhiTranslate="manageTeamApp.player.lastName">Last Name</span></th>
+            <th><span jhiTranslate="manageTeamApp.player.email">Email</span></th>
+            <th><span jhiTranslate="manageTeamApp.player.phoneNumber">Phone Number</span></th>
+            <th><span jhiTranslate="manageTeamApp.player.hireDate">Hire Date</span></th>
+            <th><span jhiTranslate="manageTeamApp.player.anneeArrivee">Annee Arrivee</span></th>
+            <th><span jhiTranslate="manageTeamApp.player.poids">Poids</span></th>
+            <th><span jhiTranslate="manageTeamApp.player.taille">Taille</span></th>
+            <th><span jhiTranslate="manageTeamApp.player.numMaillot">Num Maillot</span></th>
+            <th><span jhiTranslate="manageTeamApp.player.numLicence">Num Licence</span></th>
+            <th><span jhiTranslate="manageTeamApp.player.imgProfile">Img Profile</span></th>
+            <th><span jhiTranslate="manageTeamApp.player.player">Player</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let player of players ;trackBy: trackId">
+                <td><a [routerLink]="['/player', player.id, 'view' ]">{{player.id}}</a></td>
+                <td>{{player.firstName}}</td>
+                <td>{{player.lastName}}</td>
+                <td>{{player.email}}</td>
+                <td>{{player.phoneNumber}}</td>
+                <td>{{player.hireDate | date:'mediumDate'}}</td>
+                <td>{{player.anneeArrivee | date:'mediumDate'}}</td>
+                <td>{{player.poids}}</td>
+                <td>{{player.taille}}</td>
+                <td>{{player.numMaillot}}</td>
+                <td>{{player.numLicence}}</td>
+                <td>
+                    <a *ngIf="player.imgProfile" (click)="openFile(player.imgProfileContentType, player.imgProfile)">
+                        <img [src]="'data:' + player.imgProfileContentType + ';base64,' + player.imgProfile" style="max-height: 30px;" alt="player image"/>
+                    </a>
+                    <span *ngIf="player.imgProfile">{{player.imgProfileContentType}}, {{byteSize(player.imgProfile)}}</span>
+                </td>
+                <td>
+                    {{player.playerId}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/player', player.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fas fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/player', player.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <span class="fas fa-pencil-alt"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'player/'+ player.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fas fa-times"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

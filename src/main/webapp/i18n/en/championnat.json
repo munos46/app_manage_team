@@ -1,0 +1,29 @@
+
+{
+    "manageTeamApp": {
+        "championnat" : {
+            "home": {
+                "title": "Championnats",
+                "createLabel": "Create a new Championnat",
+                "createOrEditLabel": "Create or edit a Championnat"
+            },
+            "created": "A new Championnat is created with identifier {{ param }}",
+            "updated": "A Championnat is updated with identifier {{ param }}",
+            "deleted": "A Championnat is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Championnat {{ id }}?"
+            },
+            "detail": {
+                "title": "Championnat"
+            },
+            "nom": "Nom",
+            "pointVictoire": "Point Victoire",
+            "pointNull": "Point Null",
+            "pointDefaite": "Point Defaite",
+            "pointForfait": "Point Forfait",
+            "saison": "Saison",
+            "adversaires": "Adversaires",
+            "journees": "Journees"
+        }
+    }
+}

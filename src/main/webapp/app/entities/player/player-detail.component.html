@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="player">
+            <h2><span jhiTranslate="manageTeamApp.player.detail.title">Player</span> {{player.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="manageTeamApp.player.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{player.firstName}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.player.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{player.lastName}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.player.email">Email</span></dt>
+                <dd>
+                    <span>{{player.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.player.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{player.phoneNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.player.hireDate">Hire Date</span></dt>
+                <dd>
+                    <span>{{player.hireDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.player.anneeArrivee">Annee Arrivee</span></dt>
+                <dd>
+                    <span>{{player.anneeArrivee}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.player.poids">Poids</span></dt>
+                <dd>
+                    <span>{{player.poids}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.player.taille">Taille</span></dt>
+                <dd>
+                    <span>{{player.taille}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.player.numMaillot">Num Maillot</span></dt>
+                <dd>
+                    <span>{{player.numMaillot}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.player.numLicence">Num Licence</span></dt>
+                <dd>
+                    <span>{{player.numLicence}}</span>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.player.imgProfile">Img Profile</span></dt>
+                <dd>
+                    <div *ngIf="player.imgProfile">
+                        <a (click)="openFile(player.imgProfileContentType, player.imgProfile)">
+                            <img [src]="'data:' + player.imgProfileContentType + ';base64,' + player.imgProfile" style="max-width: 100%;" alt="player image"/>
+                        </a>
+                        {{player.imgProfileContentType}}, {{byteSize(player.imgProfile)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="manageTeamApp.player.player">Player</span></dt>
+                <dd>
+                    {{player.playerId}}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <span class="fas fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/player', player.id, 'edit']"
+                    class="btn btn-primary">
+                <span class="fas fa-pencil-alt"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

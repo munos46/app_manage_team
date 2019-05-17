@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-team-heading" jhiTranslate="manageTeamApp.team.home.createOrEditLabel">Create or edit a Team</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!team.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="team.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.team.nom" for="field_nom">Nom</label>
+                    <input type="text" class="form-control" name="nom" id="field_nom"
+                        [(ngModel)]="team.nom" required/>
+                    <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nom?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.team.adversaire" for="field_adversaire">Adversaire</label>
+                    <input type="checkbox" class="form-control" name="adversaire" id="field_adversaire"
+                        [(ngModel)]="team.adversaire" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="manageTeamApp.team.logo" for="field_logo">Logo</label>
+                    <div>
+                        <img [src]="'data:' + team.logoContentType + ';base64,' + team.logo" style="max-height: 100px;" *ngIf="team.logo" alt="team image"/>
+                        <div *ngIf="team.logo" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{team.logoContentType}}, {{byteSize(team.logo)}}</span>
+                            <button type="button" (click)="clearInputImage('logo', 'logoContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <span class="fas fa-times"></span>
+                            </button>
+                        </div>
+                        <input type="file" id="file_logo" (change)="setFileData($event, team, 'logo', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="logo" id="field_logo"
+                        [(ngModel)]="team.logo" />
+                    <input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType"
+                        [(ngModel)]="team.logoContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="manageTeamApp.team.managers" for="field_managers">Managers</label>
+                    <select class="form-control" id="field_managers" multiple name="managers" [(ngModel)]="team.managers">
+                        <option [ngValue]="getSelected(team.managers, managerOption)" *ngFor="let managerOption of managers; trackBy: trackManagerById">{{managerOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="manageTeamApp.team.players" for="field_players">Players</label>
+                    <select class="form-control" id="field_players" multiple name="players" [(ngModel)]="team.players">
+                        <option [ngValue]="getSelected(team.players, playerOption)" *ngFor="let playerOption of players; trackBy: trackPlayerById">{{playerOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <span class="fas fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <span class="fas fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

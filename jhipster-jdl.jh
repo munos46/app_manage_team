@@ -1,0 +1,114 @@
+entity Player {
+	firstName String required,
+	lastName String required, 
+	email String,
+	phoneNumber String,
+	hireDate LocalDate,
+    anneeArrivee LocalDate,
+    poids Double,
+    taille Integer,
+    numMaillot Integer,
+    numLicence String,
+    imgProfile ImageBlob
+}
+
+entity Manager {
+	firstName String required,
+	lastName String required,
+	email String,
+	phoneNumber String,
+	hireDate LocalDate,
+    anneeArrivee LocalDate,
+    imgProfile ImageBlob
+}
+
+entity Team {
+	nom String required,
+    adversaire Boolean,
+    logo ImageBlob
+}
+
+entity Stade {
+	nom String required,
+    adresse String,
+    codePostal String,
+    ville String
+}
+
+entity Game {
+    date ZonedDateTime required, 
+    home Boolean,
+    myGoal Integer,
+    herGoal Integer,    
+}
+
+entity Event {
+	nom String required,
+    date ZonedDateTime required,
+	type TypeEvenement   
+}
+
+entity Practise {
+    date ZonedDateTime required,
+}
+
+entity Action {
+	typeAction TypeAction required,
+    minute Double required,
+    prolongation Boolean,
+    commntary String
+}
+
+entity Saison {
+	nom String required,
+    dateDebut LocalDate,
+    dateFin LocalDate
+}
+
+entity Championnat {
+	nom String required,
+    pointVictoire Integer,
+    pointNull Integer,
+    pointDefaite Integer,
+    pointForfait Integer
+}
+
+enum TypeAction {
+	GOAL, CARDYELOW, ATTACK, REPLACEMENT, CARDRED 
+}
+
+enum TypeEvenement {
+	AMICAL, SOIREE, TOURNOIS, AUTRES 
+}
+
+relationship ManyToMany {
+	Practise{players} to Player,
+    Practise{manages} to Manager,
+    Game{manages} to Manager,
+    Game{players} to Player,
+    Game{actions} to Action,
+    Championnat{adversaires} to Team,
+    Team{managers} to Manager,
+    Team{players} to Player,
+    Championnat{journees} to Game
+    
+}
+
+relationship OneToOne {
+	Game{team} to Team,
+    Game{secondTeam} to Team ,
+    Game{stade} to Stade,
+    Practise{stade} to Stade ,
+    Event{team} to Team,
+    Event{stade} to Stade,
+    Championnat{saison} to Saison,
+	Action{playerOne} to Player,
+    Manager{manager} to User,
+    Action{playerTwo} to Player,
+    Player{player} to User
+}
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl

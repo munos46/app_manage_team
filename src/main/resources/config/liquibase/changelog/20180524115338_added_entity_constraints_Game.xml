@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Game.
+    -->
+    <changeSet id="20180524115338-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="team_id"
+                                 baseTableName="game"
+                                 constraintName="fk_game_team_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="team"/>
+
+        <addForeignKeyConstraint baseColumnNames="second_team_id"
+                                 baseTableName="game"
+                                 constraintName="fk_game_second_team_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="team"/>
+
+        <addForeignKeyConstraint baseColumnNames="stade_id"
+                                 baseTableName="game"
+                                 constraintName="fk_game_stade_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="stade"/>
+
+        <addForeignKeyConstraint baseColumnNames="games_id"
+                                 baseTableName="game_manages"
+                                 constraintName="fk_game_manages_games_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="game"/>
+        <addForeignKeyConstraint baseColumnNames="manages_id"
+                                 baseTableName="game_manages"
+                                 constraintName="fk_game_manages_manages_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="manager"/>
+        
+        <addForeignKeyConstraint baseColumnNames="games_id"
+                                 baseTableName="game_players"
+                                 constraintName="fk_game_players_games_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="game"/>
+        <addForeignKeyConstraint baseColumnNames="players_id"
+                                 baseTableName="game_players"
+                                 constraintName="fk_game_players_players_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="player"/>
+        
+        <addForeignKeyConstraint baseColumnNames="games_id"
+                                 baseTableName="game_actions"
+                                 constraintName="fk_game_actions_games_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="game"/>
+        <addForeignKeyConstraint baseColumnNames="actions_id"
+                                 baseTableName="game_actions"
+                                 constraintName="fk_game_actions_actions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="action"/>
+        
+    </changeSet>
+</databaseChangeLog>

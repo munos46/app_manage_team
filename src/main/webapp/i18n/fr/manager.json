@@ -1,0 +1,29 @@
+
+{
+    "manageTeamApp": {
+        "manager" : {
+            "home": {
+                "title": "Managers",
+                "createLabel": "Créer un nouveau Manager",
+                "createOrEditLabel": "Créer ou éditer un Manager"
+            },
+            "created": "Un nouveau Manager a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Manager avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Manager avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Manager {{ id }} ?"
+            },
+            "detail": {
+                "title": "Manager"
+            },
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "email": "Email",
+            "phoneNumber": "Phone Number",
+            "hireDate": "Hire Date",
+            "anneeArrivee": "Annee Arrivee",
+            "imgProfile": "Img Profile",
+            "manager": "Manager"
+        }
+    }
+}

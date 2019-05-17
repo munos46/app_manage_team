@@ -1,0 +1,58 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="manageTeamApp.saison.home.title">Saisons</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-saison" [routerLink]="['/saison/new']">
+            <span class="fas fa-plus"></span>
+            <span  jhiTranslate="manageTeamApp.saison.home.createLabel">
+            Create new Saison
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="saisons">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="manageTeamApp.saison.nom">Nom</span></th>
+            <th><span jhiTranslate="manageTeamApp.saison.dateDebut">Date Debut</span></th>
+            <th><span jhiTranslate="manageTeamApp.saison.dateFin">Date Fin</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let saison of saisons ;trackBy: trackId">
+                <td><a [routerLink]="['/saison', saison.id, 'view' ]">{{saison.id}}</a></td>
+                <td>{{saison.nom}}</td>
+                <td>{{saison.dateDebut | date:'mediumDate'}}</td>
+                <td>{{saison.dateFin | date:'mediumDate'}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/saison', saison.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fas fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/saison', saison.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <span class="fas fa-pencil-alt"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'saison/'+ saison.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fas fa-times"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

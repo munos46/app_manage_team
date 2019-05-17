@@ -1,0 +1,29 @@
+
+{
+    "manageTeamApp": {
+        "championnat" : {
+            "home": {
+                "title": "Championnats",
+                "createLabel": "Créer un nouveau Championnat",
+                "createOrEditLabel": "Créer ou éditer un Championnat"
+            },
+            "created": "Un nouveau Championnat a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Championnat avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Championnat avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Championnat {{ id }} ?"
+            },
+            "detail": {
+                "title": "Championnat"
+            },
+            "nom": "Nom",
+            "pointVictoire": "Point Victoire",
+            "pointNull": "Point Null",
+            "pointDefaite": "Point Defaite",
+            "pointForfait": "Point Forfait",
+            "saison": "Saison",
+            "adversaires": "Adversaires",
+            "journees": "Journees"
+        }
+    }
+}
